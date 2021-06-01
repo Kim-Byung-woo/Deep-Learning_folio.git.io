@@ -682,6 +682,22 @@ plt.imshow(np.squeeze(y_all[0]), 'gray') # squeeze: 1차원 축 제거
 plt.show()
 #%%
 
+arr_3 = np.array([[[ 0,  1,  2,  3],
+           [ 4,  5,  6,  7],
+           [ 8,  9, 10, 11]],
+          
+          [[12, 13, 14, 15],
+           [16, 17, 18, 19],
+           [20, 21, 22, 23]]])
+
+
+
+y_test = np.zeros((3, 3, 2), dtype=np.bool) 
+
+a = y_test[1, :, 1]
+#%%
+
+
 y_test = np.zeros((len(file_headers), IMG_HEIGHT, IMG_WIDTH, 2), dtype=np.bool) 
 
 # y_test[0][0][1][1] = 1
@@ -697,6 +713,14 @@ mask_l = imread(img_path)
 img_h = mask_r.shape[0]
 img_w = mask_r.shape[1]
 
+for i in range(img_h):
+    for j in range(int(img_w / 2)):
+        mask_r[i][j] = 0          
+        
+for i in range(img_h):
+    for j in range(int(img_w / 2), img_w):
+        mask_l[i][j] = 0
+
 
 for j in range(img_h):
     for i in range(img_w):
@@ -708,9 +732,15 @@ for j in range(img_h):
 mask_l[145][45]
 y_test[0][145][45][1]
 
-y_test[0].shape
-y_sq = np.squeeze(y_test[0][:][:][0])
 
+print(mask_l.shape)
+plt.imshow(mask_l, 'gray') # squeeze: 1차원 축 제거
+plt.show()
+
+y_0 = y_test[0, :, :, 0]
+print(y_0.shape)
+plt.imshow(y_0, 'gray') # squeeze: 1차원 축 제거
+plt.show()
 #%%
 count = 0
 for fh in file_headers:
